@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { CONTACT, mailto, whatsapp } from '../content'
-import { useLang } from '../lib/i18n'
+import { useLang } from '../lib/lang-context'
 import { beirutParts, useBeirutTime, useReveal } from '../lib/hooks'
 
 const Arrow = () => (

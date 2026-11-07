@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, type CSSProperties } from 'react'
-import { useLang } from '../lib/i18n'
+import { useLang } from '../lib/lang-context'
 import { useReveal } from '../lib/hooks'
 import type { ServiceGroup } from '../content'
 

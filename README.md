@@ -1,7 +1,11 @@
 # charbelnasseh.dev
 
 Portfolio of Charbel Nasseh, web developer and IT engineer in Lebanon.
-A single-page React + Vite site with a live three.js desk scene, English and Arabic (RTL), light and dark themes.
+A single-page React + Vite site with a live, explorable three.js room, English and Arabic (RTL), light and dark themes.
+
+In the room, every object opens something: the monitor is a working terminal, the clock shows Beirut, Dubai and Riyadh time,
+the bookshelf lists the stack, the pinboard the projects, the phone the contact details, and the character waves back.
+The lamp, mug, plant and beanbag are small toys. The scene code lives in `src/scene/` (room, character, screens, stage).
 
 ## Stack
 
@@ -9,7 +13,7 @@ A single-page React + Vite site with a live three.js desk scene, English and Ara
 - three.js for the 3D desk (lazy-loaded; a pre-rendered poster shows first)
 - [`@lucasmarkes/hairline`](https://github.com/lucasmarkes/hairline) figures in the services section (lazy-loaded)
 - Self-hosted fonts: Switzer (Latin), IBM Plex Sans Arabic (Arabic)
-- Hosted on Cloudflare Pages
+- Hosted on Cloudflare, deployed from GitHub
 
 ## Develop
 
@@ -31,18 +35,14 @@ npm run preview   # serve dist/ locally
 (including the sha256 hash of the inline boot script in `index.html`), security headers, and cache rules:
 hashed assets and fonts are cached for a year as immutable, HTML always revalidates.
 
-## Deploy to Cloudflare Pages
+## Deploy (Cloudflare)
 
-1. Push this repository to GitHub.
-2. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → pick the repository.
-3. Build settings:
-   - Framework preset: **None** (or Vite)
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-   - Environment variable: `NODE_VERSION` = `22`
-4. After the first deploy: Custom domains → add `charbelnasseh.dev` (and `www.charbelnasseh.dev`).
-   Redirect `www` to the apex with a Cloudflare redirect rule.
-5. Submit `https://charbelnasseh.dev/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
+The site is deployed by Cloudflare from the `main` branch of
+[charbel-dot/charbel-portfolio](https://github.com/charbel-dot/charbel-portfolio): every push to `main` builds with
+`npm run build` and serves `dist/` on charbelnasseh.dev. `dist/_headers` (security headers and caching) is applied by Cloudflare.
+
+Turn off the `workers.dev` and preview URLs in the project's Domains settings so only charbelnasseh.dev serves the site,
+and submit `https://charbelnasseh.dev/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
 
 ## Edit content
 

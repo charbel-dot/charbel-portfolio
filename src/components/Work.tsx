@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useLang } from '../lib/i18n'
+import { useLang } from '../lib/lang-context'
 import { usePrefersReducedMotion } from '../lib/hooks'
 import { Panes } from './Fragments'
 

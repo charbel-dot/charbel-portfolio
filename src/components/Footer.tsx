@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { CONTACT, CREDITS, mailto, whatsapp } from '../content'
-import { useLang } from '../lib/i18n'
+import { useLang } from '../lib/lang-context'
 import { beirutParts, useBeirutTime } from '../lib/hooks'
 
 export default function Footer() {

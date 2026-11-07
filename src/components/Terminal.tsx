@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
-import { useLang } from '../lib/i18n'
+import { useLang } from '../lib/lang-context'
 import { beirutParts } from '../lib/hooks'
 import { mailto, whatsapp } from '../content'
 
-type Line = { kind: 'in' | 'out'; text: string }
+type Line = { id: number; kind: 'in' | 'out'; text: string }
+
+let lineId = 0
+const line = (kind: Line['kind'], text: string): Line => ({ id: ++lineId, kind, text })
 
 const ANCHORS: Record<string, string> = {
   services: 'services',
@@ -16,13 +19,13 @@ const ANCHORS: Record<string, string> = {
 export default function Terminal({ onClose }: { onClose: () => void }) {
   const { t, lang } = useLang()
   const T = t.terminal
-  const [lines, setLines] = useState<Line[]>(() => T.welcome.map((text) => ({ kind: 'out', text })))
+  const [lines, setLines] = useState<Line[]>(() => T.welcome.map((text) => line('out', text)))
   const [value, setValue] = useState('')
-  const [history, setHistory] = useState<string[]>([])
-  const [hIndex, setHIndex] = useState(-1)
+  // command history is only read in key handlers, so it lives in refs
+  const history = useRef<string[]>([])
+  const hIndex = useRef(-1)
   const inputRef = useRef<HTMLInputElement>(null)
   const bodyRef = useRef<HTMLDivElement>(null)
-  const dialogRef = useRef<HTMLDivElement>(null)
   const returnFocus = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -46,7 +49,7 @@ export default function Terminal({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  const out = (texts: string[]) => texts.map((text) => ({ kind: 'out' as const, text }))
+  const out = (texts: string[]) => texts.map((text) => line('out', text))
 
   const goTo = (id: string) => {
     onClose()
@@ -56,10 +59,10 @@ export default function Terminal({ onClose }: { onClose: () => void }) {
   const run = (raw: string) => {
     const cmd = raw.trim()
     const name = cmd.toLowerCase().split(/\s+/)[0]
-    const echo: Line = { kind: 'in', text: cmd }
+    const echo = line('in', cmd)
     if (!cmd) return setLines((l) => [...l, echo])
-    setHistory((h) => [cmd, ...h].slice(0, 30))
-    setHIndex(-1)
+    history.current = [cmd, ...history.current].slice(0, 30)
+    hIndex.current = -1
     switch (name) {
       case 'help':
       case 'ls':
@@ -94,7 +97,7 @@ export default function Terminal({ onClose }: { onClose: () => void }) {
         setLines((l) => [...l, echo, ...out([T.opening(name)])])
         return goTo(ANCHORS[name])
       default:
-        return setLines((l) => [...l, echo, { kind: 'out', text: T.unknown(name) }])
+        return setLines((l) => [...l, echo, line('out', T.unknown(name))])
     }
   }
 
@@ -105,16 +108,17 @@ export default function Terminal({ onClose }: { onClose: () => void }) {
   }
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'ArrowUp' && history.length) {
+    const h = history.current
+    if (e.key === 'ArrowUp' && h.length) {
       e.preventDefault()
-      const i = Math.min(hIndex + 1, history.length - 1)
-      setHIndex(i)
-      setValue(history[i])
+      const i = Math.min(hIndex.current + 1, h.length - 1)
+      hIndex.current = i
+      setValue(h[i])
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
-      const i = hIndex - 1
-      setHIndex(i)
-      setValue(i >= 0 ? history[i] : '')
+      const i = Math.max(-1, hIndex.current - 1)
+      hIndex.current = i
+      setValue(i >= 0 ? h[i] : '')
     } else if (e.key === 'Tab') {
       const opts = ['help', 'whoami', 'services', 'work', 'about', 'contact', 'status', 'time', 'hire', 'clear', 'exit']
       const m = opts.filter((o) => o.startsWith(value.toLowerCase()))
@@ -128,15 +132,12 @@ export default function Terminal({ onClose }: { onClose: () => void }) {
   const chips = ['whoami', 'services', 'work', 'contact', 'hire']
 
   return (
-    <div
-      ref={dialogRef}
+    <dialog
+      open
       className="term"
-      role="dialog"
-      aria-modal="false"
       aria-label={T.title}
       data-ui
       dir="ltr"
-      onClick={() => inputRef.current?.focus()}
     >
       <div className="term-bar">
         <span className="term-title">{T.title}</span>
@@ -147,8 +148,8 @@ export default function Terminal({ onClose }: { onClose: () => void }) {
         </button>
       </div>
       <div className="term-body" ref={bodyRef} aria-live="polite">
-        {lines.map((l, i) => (
-          <pre key={i} className={l.kind === 'in' ? 'term-in' : 'term-out'} dir={l.kind === 'out' && lang === 'ar' ? 'auto' : 'ltr'}>
+        {lines.map((l) => (
+          <pre key={l.id} className={l.kind === 'in' ? 'term-in' : 'term-out'} dir={l.kind === 'out' && lang === 'ar' ? 'auto' : 'ltr'}>
             <code>
               {l.kind === 'in' && <span className="term-prompt">$ </span>}
               {l.text}
@@ -176,11 +177,11 @@ export default function Terminal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="term-chips">
         {chips.map((c) => (
-          <button key={c} type="button" onClick={(e) => (e.stopPropagation(), run(c))}>
+          <button key={c} type="button" onClick={() => run(c)}>
             {c}
           </button>
         ))}
       </div>
-    </div>
+    </dialog>
   )
 }

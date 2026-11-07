@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { useLang } from '../lib/i18n'
+import { useLang } from '../lib/lang-context'
 import { useReveal } from '../lib/hooks'
 
 /** Lebanon, where the work is done: three real pictures, credited in the footer. */
@@ -9,7 +9,7 @@ export default function Places() {
   const p = t.places
   const s = (i: number) => ({ '--i': i }) as CSSProperties
   return (
-    <section className="places" ref={ref} aria-labelledby="places-h">
+    <section className="places" id="places" ref={ref} aria-labelledby="places-h">
       <h2 id="places-h" className="section-h" data-reveal style={s(0)}>
         {p.heading}
       </h2>

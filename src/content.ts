@@ -3,6 +3,8 @@
  * Edit this file to change copy; components only read from it.
  */
 
+import type { CardSpot, SpotId } from './scene/hotspots'
+
 export type Lang = 'en' | 'ar'
 
 /** Contact details. WHATSAPP_NUMBER is still a placeholder — swap it before launch. */
@@ -38,7 +40,22 @@ export type Project = {
   link?: { href: string; label: string }
 }
 
+export type CardAction = { label: string; href: string; external?: boolean }
+export type RoomCard = { title: string; body: string; items?: string[]; actions: CardAction[] }
+
 type Copy = {
+  room: {
+    hint: string
+    listLabel: string
+    close: string
+    prev: string
+    next: string
+    loading: string
+    names: Record<SpotId, string>
+    verbs: Record<SpotId, string>
+    cards: Record<CardSpot, RoomCard>
+    zones: { city: string; zone: string }[]
+  }
   meta: { title: string; description: string }
   nav: { services: string; work: string; about: string; contact: string; switchTo: string; switchLabel: string; menu: string; dark: string }
   hero: {
@@ -106,6 +123,97 @@ type Copy = {
 }
 
 const en: Copy = {
+  room: {
+    hint: 'Click anything in the room',
+    listLabel: 'Things in the room',
+    close: 'Back to the room',
+    prev: 'Previous',
+    next: 'Next',
+    loading: 'Waking the room up',
+    names: {
+      monitor: 'Terminal',
+      charbel: 'Charbel',
+      server: 'Servers',
+      books: 'Bookshelf',
+      board: 'Pinboard',
+      clock: 'Clock',
+      window: 'Window',
+      phone: 'Phone',
+      print: 'Cedar',
+      lamp: 'Desk lamp',
+      mug: 'Coffee',
+      plant: 'Plant',
+      beanbag: 'Beanbag',
+    },
+    verbs: {
+      monitor: 'type a command',
+      charbel: 'say hello',
+      server: 'see what runs',
+      books: 'read the spines',
+      board: 'see the projects',
+      clock: 'check the time',
+      window: 'look outside',
+      phone: 'get in touch',
+      print: 'read the print',
+      lamp: 'switch it',
+      mug: 'take a sip',
+      plant: 'give it a poke',
+      beanbag: 'flop down',
+    },
+    cards: {
+      charbel: {
+        title: 'Hi, I’m Charbel',
+        body: 'Web developer and IT engineer in Lebanon. I build websites and the systems behind them, for businesses at home and across the Gulf.',
+        actions: [
+          { label: 'Start a project', href: '#contact' },
+          { label: 'About me', href: '#about' },
+        ],
+      },
+      server: {
+        title: 'Servers and hosting',
+        body: 'The tall screen shows a server’s load. Under the desk is the kind of machine I set up, deploy to and look after.',
+        items: ['Linux', 'Docker', 'Proxmox', 'VPS administration', 'Deployment', 'Backups', 'Monitoring'],
+        actions: [{ label: 'What I do', href: '#services' }],
+      },
+      books: {
+        title: 'What I build with',
+        body: 'The spines on the shelf are the tools I reach for every week.',
+        items: ['WordPress', 'WooCommerce', 'React', 'ERPNext', 'Linux', 'Docker', 'Proxmox'],
+        actions: [{ label: 'What I do', href: '#services' }],
+      },
+      board: {
+        title: 'On the board',
+        body: 'Three projects pinned up: an online store, a restaurant system and my own brand.',
+        items: ['HÚM, an online store on WooCommerce', 'Restaurant management, ERPNext with URY', 'MobiTouch, web and IT services'],
+        actions: [{ label: 'See the work', href: '#work' }],
+      },
+      clock: {
+        title: 'Beirut time',
+        body: 'Beirut is within an hour of Gulf time, so our calls happen inside your working day.',
+        actions: [{ label: 'Start a project', href: '#contact' }],
+      },
+      window: {
+        title: 'The view from Lebanon',
+        body: 'The window shows the sky over Beirut at this hour: blue by day, orange at sunset, dark at night.',
+        actions: [{ label: 'Working from Lebanon', href: '#places' }],
+      },
+      phone: {
+        title: 'Get in touch',
+        body: 'Tell me what you need and I’ll reply with next steps.',
+        actions: [],
+      },
+      print: {
+        title: 'The cedar',
+        body: 'The cedar of Lebanon, the tree on the flag. The oldest still grow in the Cedars of God forest, high on Mount Lebanon.',
+        actions: [{ label: 'See the photo', href: '#places' }],
+      },
+    },
+    zones: [
+      { city: 'Beirut', zone: 'Asia/Beirut' },
+      { city: 'Dubai', zone: 'Asia/Dubai' },
+      { city: 'Riyadh', zone: 'Asia/Riyadh' },
+    ],
+  },
   meta: {
     title: 'Charbel Nasseh — Web developer and IT engineer, Lebanon',
     description:
@@ -298,6 +406,97 @@ const en: Copy = {
 }
 
 const ar: Copy = {
+  room: {
+    hint: 'انقر على أي شيء في الغرفة',
+    listLabel: 'أشياء في الغرفة',
+    close: 'العودة إلى الغرفة',
+    prev: 'السابق',
+    next: 'التالي',
+    loading: 'الغرفة تستيقظ',
+    names: {
+      monitor: 'الطرفية',
+      charbel: 'شربل',
+      server: 'الخوادم',
+      books: 'رف الكتب',
+      board: 'لوحة الملاحظات',
+      clock: 'الساعة',
+      window: 'النافذة',
+      phone: 'الهاتف',
+      print: 'الأرزة',
+      lamp: 'مصباح المكتب',
+      mug: 'القهوة',
+      plant: 'النبتة',
+      beanbag: 'الكرسي الطري',
+    },
+    verbs: {
+      monitor: 'اكتب أمراً',
+      charbel: 'قل مرحباً',
+      server: 'شاهد ما يعمل',
+      books: 'اقرأ العناوين',
+      board: 'شاهد المشاريع',
+      clock: 'اعرف الوقت',
+      window: 'انظر إلى الخارج',
+      phone: 'تواصل معي',
+      print: 'اقرأ اللوحة',
+      lamp: 'شغّله أو أطفئه',
+      mug: 'رشفة قهوة',
+      plant: 'المسها',
+      beanbag: 'اجلس',
+    },
+    cards: {
+      charbel: {
+        title: 'مرحباً، أنا شربل',
+        body: 'مطوّر مواقع ومهندس معلوماتية في لبنان. أبني المواقع والأنظمة التي تعمل خلفها، للشركات هنا وفي الخليج.',
+        actions: [
+          { label: 'ابدأ مشروعاً', href: '#contact' },
+          { label: 'من أنا', href: '#about' },
+        ],
+      },
+      server: {
+        title: 'الخوادم والاستضافة',
+        body: 'الشاشة الطويلة تعرض حمل الخادم. وتحت المكتب جهاز من النوع الذي أُعدّه وأنشر عليه وأعتني به.',
+        items: ['لينكس', 'دوكر', 'بروكسموكس', 'إدارة VPS', 'النشر', 'النسخ الاحتياطي', 'المراقبة'],
+        actions: [{ label: 'ماذا أقدّم', href: '#services' }],
+      },
+      books: {
+        title: 'أدواتي',
+        body: 'العناوين على الرف هي الأدوات التي أستخدمها كل أسبوع.',
+        items: ['WordPress', 'WooCommerce', 'React', 'ERPNext', 'Linux', 'Docker', 'Proxmox'],
+        actions: [{ label: 'ماذا أقدّم', href: '#services' }],
+      },
+      board: {
+        title: 'على اللوحة',
+        body: 'ثلاثة مشاريع مثبّتة: متجر إلكتروني، ونظام مطاعم، وعلامتي الخاصة.',
+        items: ['HÚM، متجر إلكتروني على ووكومرس', 'إدارة المطاعم، ERPNext مع URY', 'MobiTouch، خدمات الويب والمعلوماتية'],
+        actions: [{ label: 'شاهد الأعمال', href: '#work' }],
+      },
+      clock: {
+        title: 'توقيت بيروت',
+        body: 'توقيت بيروت قريب من توقيت الخليج بساعة أو أقل، فتكون اتصالاتنا ضمن يوم عملك.',
+        actions: [{ label: 'ابدأ مشروعاً', href: '#contact' }],
+      },
+      window: {
+        title: 'المنظر من لبنان',
+        body: 'تُظهر النافذة سماء بيروت في هذه الساعة: زرقاء نهاراً، برتقالية عند الغروب، ومظلمة ليلاً.',
+        actions: [{ label: 'أعمل من لبنان', href: '#places' }],
+      },
+      phone: {
+        title: 'تواصل معي',
+        body: 'أخبرني بما تحتاجه وسأرد عليك بالخطوات التالية.',
+        actions: [],
+      },
+      print: {
+        title: 'الأرزة',
+        body: 'أرزة لبنان، الشجرة التي على العلم. أقدمها ما زال ينمو في غابة أرز الربّ، عالياً في جبل لبنان.',
+        actions: [{ label: 'شاهد الصورة', href: '#places' }],
+      },
+    },
+    zones: [
+      { city: 'بيروت', zone: 'Asia/Beirut' },
+      { city: 'دبي', zone: 'Asia/Dubai' },
+      { city: 'الرياض', zone: 'Asia/Riyadh' },
+    ],
+  },
   meta: {
     title: 'شربل ناصح — مطوّر مواقع ومهندس معلوماتية، لبنان',
     description:

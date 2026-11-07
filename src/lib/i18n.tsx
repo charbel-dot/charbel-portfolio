@@ -1,8 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import { COPY, type Copy, type Lang } from '../content'
-
-type Ctx = { lang: Lang; t: Copy; toggle: () => void }
-const LangContext = createContext<Ctx | null>(null)
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { COPY, type Lang } from '../content'
+import { LangContext } from './lang-context'
 
 function initialLang(): Lang {
   try {
@@ -45,8 +43,3 @@ export function LangProvider({ children }: { children: ReactNode }) {
   return <LangContext.Provider value={value}>{children}</LangContext.Provider>
 }
 
-export function useLang() {
-  const ctx = useContext(LangContext)
-  if (!ctx) throw new Error('useLang outside LangProvider')
-  return ctx
-}

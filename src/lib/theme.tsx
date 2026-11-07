@@ -1,8 +1,5 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-
-export type Theme = 'light' | 'dark'
-type Ctx = { theme: Theme; toggle: () => void }
-const ThemeContext = createContext<Ctx | null>(null)
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { ThemeContext, type Theme } from './theme-context'
 
 const systemDark = () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches
 
@@ -51,8 +48,3 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
-export function useTheme() {
-  const ctx = useContext(ThemeContext)
-  if (!ctx) throw new Error('useTheme outside ThemeProvider')
-  return ctx
-}

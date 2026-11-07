@@ -1,5 +1,5 @@
-import { useLang } from '../lib/i18n'
-import { useTheme } from '../lib/theme'
+import { useLang } from '../lib/lang-context'
+import { useTheme } from '../lib/theme-context'
 
 export default function Nav() {
   const { t, toggle, lang } = useLang()

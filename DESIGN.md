@@ -10,6 +10,13 @@ click the monitor (or "Use my terminal") and type real commands.
 The room follows the time in Beirut: the wall clock shows the real hour, the window sky changes,
 and the desk lamp switches on in the evening.
 
+## The room
+
+Every object is a place to go: hover shows its name and what it does, a click flies the camera to it and opens
+a card beside it (a bottom sheet on phones). The same objects are listed as buttons beside the room, so everything
+works from the keyboard. The character types, nods to his music, sips coffee, uses the mouse, stretches, thinks,
+turns to face the visitor and waves when greeted. A still poster of the room shows until the live scene starts.
+
 ## Tokens
 
 | Role | Light | Dark |

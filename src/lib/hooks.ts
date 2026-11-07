@@ -10,13 +10,15 @@ export function useBeirutTime() {
   return now
 }
 
+const BEIRUT = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Asia/Beirut',
+  hour: '2-digit',
+  minute: '2-digit',
+  hourCycle: 'h23',
+})
+
 export function beirutParts(d: Date) {
-  const parts = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Asia/Beirut',
-    hour: '2-digit',
-    minute: '2-digit',
-    hourCycle: 'h23',
-  }).formatToParts(d)
+  const parts = BEIRUT.formatToParts(d)
   const h = Number(parts.find((p) => p.type === 'hour')?.value ?? 0)
   const m = Number(parts.find((p) => p.type === 'minute')?.value ?? 0)
   return { h, m, label: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`, hour: h + m / 60 }
