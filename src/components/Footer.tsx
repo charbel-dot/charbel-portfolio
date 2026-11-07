@@ -78,7 +78,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://mobitouch.online" target="_blank" rel="noopener">
+              <a href="https://mobitouch.tech" target="_blank" rel="noopener">
                 MobiTouch
               </a>
             </li>

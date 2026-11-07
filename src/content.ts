@@ -7,10 +7,10 @@ import type { CardSpot, SpotId } from './scene/hotspots'
 
 export type Lang = 'en' | 'ar'
 
-/** Contact details. WHATSAPP_NUMBER is still a placeholder — swap it before launch. */
+/** Contact details used across the page. */
 export const CONTACT = {
   email: 'hello@charbelnasseh.dev',
-  whatsappNumber: '96100000000',
+  whatsappNumber: '96171662507',
   instagram: 'charbel.nasseh',
   instagramUrl: 'https://instagram.com/charbel.nasseh',
 }
@@ -325,7 +325,7 @@ const en: Copy = {
         lines: ['MobiTouch'],
         discipline: 'My web and IT services brand',
         description: 'Where my client work for businesses is offered and delivered.',
-        link: { href: 'https://mobitouch.online', label: 'Visit mobitouch.online' },
+        link: { href: 'https://mobitouch.tech', label: 'Visit mobitouch.tech' },
       },
     ],
   },
@@ -608,7 +608,7 @@ const ar: Copy = {
         lines: ['MobiTouch'],
         discipline: 'علامتي لخدمات الويب والمعلوماتية',
         description: 'حيث أقدّم عملي للشركات وأسلّمه.',
-        link: { href: 'https://mobitouch.online', label: 'زُر mobitouch.online' },
+        link: { href: 'https://mobitouch.tech', label: 'زُر mobitouch.tech' },
       },
     ],
   },

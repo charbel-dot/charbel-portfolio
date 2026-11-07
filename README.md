@@ -46,9 +46,7 @@ and submit `https://charbelnasseh.dev/sitemap.xml` in Google Search Console and 
 
 ## Edit content
 
-All copy, in both languages, plus contact details and picture credits, lives in `src/content.ts`.
-
-**Before launch:** `CONTACT.whatsappNumber` is still the placeholder `96100000000`.
+All copy, in both languages, plus contact details (WhatsApp +961 71 662 507) and picture credits, lives in `src/content.ts`.
 
 ## Regenerate the room posters
 
