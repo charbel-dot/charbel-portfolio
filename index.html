@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Charbel Nasseh — Web developer and IT engineer, Lebanon</title>
+    <meta
+      name="description"
+      content="Charbel Nasseh builds websites, online stores, ERPNext business systems and the Linux servers behind them, for businesses in Lebanon and across the Gulf."
+    />
+    <link rel="canonical" href="https://charbelnasseh.dev/" />
+    <link rel="alternate" hreflang="en" href="https://charbelnasseh.dev/" />
+    <link rel="alternate" hreflang="ar" href="https://charbelnasseh.dev/?lang=ar" />
+    <link rel="alternate" hreflang="x-default" href="https://charbelnasseh.dev/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Charbel Nasseh" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://charbelnasseh.dev/" />
+    <meta property="og:title" content="Charbel Nasseh — Web developer and IT engineer" />
+    <meta
+      property="og:description"
+      content="Websites, online stores, ERPNext and the servers behind them. Lebanon and the Gulf."
+    />
+    <meta property="og:image" content="https://charbelnasseh.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ar_LB" />
+    <meta property="og:site_name" content="Charbel Nasseh" />
+    <meta property="og:image:alt" content="Charbel Nasseh, web developer and IT engineer in Lebanon" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Charbel Nasseh — Web developer and IT engineer" />
+    <meta name="twitter:description" content="Websites, online stores, ERPNext and the servers behind them. Lebanon and the Gulf." />
+    <meta name="twitter:image" content="https://charbelnasseh.dev/og.png" />
+
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="/images/beirut-corniche-800.webp" imagesrcset="/images/beirut-corniche-800.webp 800w, /images/beirut-corniche.webp 1600w" imagesizes="(max-width: 760px) 100vw, 26vw" />
+    <link rel="preload" href="/fonts/switzer-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/switzer-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Charbel Nasseh",
+        "url": "https://charbelnasseh.dev/",
+        "jobTitle": "Web developer and IT engineer",
+        "email": "mailto:hello@charbelnasseh.dev",
+        "address": { "@type": "PostalAddress", "addressCountry": "LB" },
+        "sameAs": ["https://instagram.com/charbel.nasseh"],
+        "knowsAbout": ["WordPress", "WooCommerce", "React", "ERPNext", "Linux", "Docker", "Proxmox"]
+      }
+    </script>
+    <script>
+      document.documentElement.classList.add('js');
+      try {
+        var qt = new URLSearchParams(location.search).get('theme');
+        var t = qt === 'dark' || qt === 'light' ? qt : localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+      try {
+        var q = new URLSearchParams(location.search).get('lang');
+        var l = q === 'ar' || q === 'en' ? q : localStorage.getItem('lang');
+        if (l === 'ar') {
+          document.documentElement.lang = 'ar';
+          document.documentElement.dir = 'rtl';
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding:24px;font:18px/1.5 system-ui,sans-serif">
+        Charbel Nasseh — web developer and IT engineer in Lebanon.
+        Email <a href="mailto:hello@charbelnasseh.dev">hello@charbelnasseh.dev</a>.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
